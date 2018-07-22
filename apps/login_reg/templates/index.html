@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Main</title>
+        {% load static %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'main.css' %}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="col">
+                <h2>Login</h2>
+                <form action="/login_reg/login" method="post">
+                    {% csrf_token %}
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "login" %}
+                            <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <table>
+                        <tr>
+                            <td class="input_name">Email: </td>
+                            <td> <input type="text" name="email"></td>
+                        </tr>
+                        <tr>
+                            <td class="input_name">Password: </td>
+                            <td> <input type="password" name="password"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="input_name"><input type="submit" value="Login"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div> <br/>
+
+            <div class="col">
+                <h2>Registration</h2>
+                <form action="/login_reg/register" method="post">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td class="input_name">First Name: </td>
+                            <td> 
+                                <input type="text" name="first_name"> 
+                                
+                            </td>
+                            <td class="errorTD">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.extra_tags == "first_name" %}
+                                        <span class="error">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input_name">Last Name: </td>
+                            <td> 
+                                <input type="text" name="last_name"> 
+                            </td>
+                            <td class="errorTD">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.extra_tags == "last_name" %}
+                                        <span class="error">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input_name">Email: </td>
+                            <td> 
+                                <input type="text" name="email"> 
+                            </td>
+                            <td class="errorTD">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.extra_tags == "email" %}
+                                        <span class="error">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input_name">Birthday: </td>
+                            <td> 
+                                <input type="date" name="birthday"> 
+                            </td>
+                            <td class="errorTD">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.extra_tags == "birthday" %}
+                                        <span class="error">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input_name">Password: </td>
+                            <td> 
+                                <input type="password" name="password"> 
+                            </td>
+                            <td class="errorTD">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.extra_tags == "password" %}
+                                        <span class="error">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input_name">Confirm: </td>
+                            <td> 
+                                <input type="password" name="confirm">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="submit_orient"><input type="submit" value="Register"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Success</title>
+        {% load static %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'main.css' %}" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome {{ name }}!</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="success">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <form action="/login_reg/logout" method="post">
+                {% csrf_token %}
+                <input type="submit" value="logout">
+            </form>
+        </div>
+    </body>
+</html>
