@@ -1,0 +1,29 @@
+.container {
+    margin: 0px;
+    padding: 5px;
+}
+
+td {
+    width: 90px;
+    padding: 5px;
+}
+
+td.errorTD {
+    width: 270px;
+}
+
+.input_name {
+    width: 90px;
+}
+
+.input_name, .submit_orient {
+    text-align: right;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
