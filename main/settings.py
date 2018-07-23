@@ -25,7 +25,7 @@ SECRET_KEY = 'uz_wd1^38k9k3w=x_^^yyq*o@@w2+!8r#03&+k_8=#f_b3$ic@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['packet_write_wait: Connection to 18.222.77.99 port 22: Broken pipe']
+ALLOWED_HOSTS = ['18.222.77.99']
 
 
 # Application definition
