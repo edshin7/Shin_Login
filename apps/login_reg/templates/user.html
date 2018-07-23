@@ -9,17 +9,80 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{% static 'main.css' %}" />
     </head>
     <body>
+        <div class="header">
+            <h1>Welcome {{ user.first_name }} {{ user.last_name }}!</h1>
+            <div>
+                <a href="{% url 'edit' userId=user.id %}">Edit Account</a>
+                <form action="/login_reg/logout" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="logout">
+                </form>
+            </div>
+        </div>
+
         <div class="container">
-            <h1>Welcome {{ name }}!</h1>
             {% if messages %}
                 {% for message in messages %}
-                    <p class="success">{{ message }}</p>
+                    {% if message.extra_tags == "success" %}
+                        <p class="success">{{ message }}</p>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
-            <form action="/login_reg/logout" method="post">
-                {% csrf_token %}
-                <input type="submit" value="logout">
-            </form>
+            <div class="col">
+                <h2>Quotes:</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == "like" %}
+                        <p class="error">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <br/>
+                {% for quote in quotes %}
+                    <div class="quote">
+                        <p>{{ quote.author.name }}:</p>
+                        <p>"{{ quote.content }}"</p><br/>
+                        <p>
+                            Posted by 
+                            <a href="{% url 'userQuotes' userId=quote.uploader.id %}">{{ quote.uploader.first_name }} {{ quote.uploader.last_name }}</a>
+                        </p><br/>
+                        <p>
+                            <form action="{% url 'likeQuote' quoteId=quote.id %}" method="post">
+                                {% csrf_token %}
+                                {{ quote.likes.count }} people like this <input type="submit" value="Like It">
+                            </form>
+                        </p>
+                        {% if quote.uploader.id == curUserId %}
+                            <a href="{% url 'delQuote' quoteId=quote.id %}">Delete</a>
+                        {% endif %}
+                    </div><br/>
+                {% endfor %}
+            </div>
+
+            <div class="col">
+                <h2>Add Quote:</h2>
+                <form action="{% url 'addQuote' %}" method="post">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "name" %}
+                            <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <p>Author: <input type="text" name="name"><br/></p>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "content" %}
+                            <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <p>Quote:</p>
+                    <textarea name="content"></textarea><br/>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
         </div>
     </body>
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Success</title>
+        {% load static %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'main.css' %}" />
+    </head>
+    <body>
+        <div class="header">
+            <h1>Edit Account</h1>
+            <div>
+                <a href="{% url 'quotes' %}">Back</a>
+                <form action="/login_reg/logout" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="logout">
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col">
+                <form action="{% url 'updateAccount' userId=user.id %}" method="post">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "first_name" %}
+                            <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <p>First name: <input type="text" name="first_name" value="{{ user.first_name }}"></p>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "last_name" %}
+                            <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <p>Last name: <input type="text" name="last_name" value="{{ user.last_name }}"></p>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "email" %}
+                            <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <input type="hidden" name="originalEmail" value="{{ user.email }}">
+                    <p>Email: <input type="text" name="email" value="{{ user.email }}"></p>
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

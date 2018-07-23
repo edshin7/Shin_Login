@@ -27,3 +27,30 @@ td.errorTD {
 .success {
     color: green;
 }
+
+.header h1, .header div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header div {
+    width: 70%;
+    text-align: right;
+}
+
+.header div a, .header div form {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.col {
+    width: 380px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.quote {
+    border: 1px solid black;
+    padding: 10px;
+}
